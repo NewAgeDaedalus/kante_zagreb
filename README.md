@@ -8,7 +8,7 @@ Verzija: 1.0\
 Jezik: hrvatski\
 Podaci stvoreni: 30.10.2023.\
 Prostor: Grad Zagreb\
-Baza podataka: PostgreSQL\
+Baza podataka: PostgreSQL
 
 ## Uvoz za POSTGRESQL na operacijskom sustavu GNU/LINUX
 Stvorite bazu podataka za kante za smeće
