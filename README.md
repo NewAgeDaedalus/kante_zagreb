@@ -3,12 +3,12 @@
 Otvoreni skup podataka za kante za smeće u Zagrebu.
 Laboratorijske vježbe iz kolegija otvorenog računarstva, Fakulteta elektrotehnike i računarstva Zagreb.
 
-Autor: Fabian Penezić
-Verzija: 1.0
-Jezik: hrvatski
-Podaci stvoreni: 30.10.2023.
-Prostor: Grad Zagreb
-Baza podataka: PostgreSQL
+Autor: Fabian Penezić\
+Verzija: 1.0\
+Jezik: hrvatski\
+Podaci stvoreni: 30.10.2023.\
+Prostor: Grad Zagreb\
+Baza podataka: PostgreSQL\
 
 ## Uvoz za POSTGRESQL na operacijskom sustavu GNU/LINUX
 Stvorite bazu podataka za kante za smeće
