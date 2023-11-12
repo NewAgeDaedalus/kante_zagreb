@@ -23,9 +23,9 @@ psql -d kante_zagreb -a -f creation.sql
 ## Opis skupa podataka
 
 ### Entitet kante
-| id | tip\_id | četvrt\_id | geo\_visina | geo_širina |
+| id | tip\_id | četvrt\_id | reciklažno\_dvorište\_id | geo\_visina | geo_širina |
 |----|---------|------------|-------------|------------|
-|    |ključ na tip kante za smeće | ključ na četvrti u kojoj se nalazi | geografska visina | geografska širina |
+|    |ključ na tip kante za smeće | ključ na četvrti u kojoj se nalazi | ključ na reciklažno dvorište u kojem se nalaz  |geografska visina | geografska širina |
 
 ### Entitet tip\_kante
 
@@ -37,4 +37,9 @@ psql -d kante_zagreb -a -f creation.sql
 | id |  ime    |  površina |  broj\_stanovnika |
 |----|---------|------------|-------------|
 |    | ime četvrti| površina izražena u kvadratnim kilometrima | 
+
+### Entitet reciklažna\_dvorišta
+| id |  ime    |  adresa    |
+|----|---------|------------|
+|    | ime reciklažnog dvorišta| adresa reciklažnog dvorišta
 
