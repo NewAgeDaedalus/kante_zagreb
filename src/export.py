@@ -9,22 +9,7 @@ def create_kanta_object(row):
             'geo_visina':row[9], 'geo_širina':row[10]
     }
 
-# Stvrara listu koja sadržava objekta kanti i reckilažnih_dvorišta,
-# reckilažna dvorišta sadrže objekte kanti
-def export_json(cur):
-    query = ''' 
-    SELECT kante.id, kante_tip.ime, kante_tip.prima, kante_tip.privatno,
-        četvrti.ime, četvrti.površina, četvrti.broj_stanovnika,
-        reciklažna_dvorišta.ime, reciklažna_dvorišta.adresa,
-        geo_visina, geo_širina
-    FROM kante
-    LEFT JOIN reciklažna_dvorišta ON reciklažno_dvorište_id = reciklažna_dvorišta.id
-    LEFT JOIN četvrti ON četvrti.id = četvrt_id
-    LEFT JOIN kante_tip ON kante_tip.id = tip_id;
-    '''
-    cur.execute(query)
-    rows = cur.fetchall()
-
+def rows_to_json(rows:list) -> list:
     result = []
     # Pronađi reciklažna_dvorišta
     rd_dvorišta = {}
@@ -47,6 +32,25 @@ def export_json(cur):
     for dvorište in rd_dvorišta.values():
         result.append(dvorište)
     return result
+
+
+# Stvrara listu koja sadržava objekta kanti i reckilažnih_dvorišta,
+# reckilažna dvorišta sadrže objekte kanti
+def export_json(cur):
+    query = ''' 
+    SELECT kante.id, kante_tip.ime, kante_tip.prima, kante_tip.privatno,
+        četvrti.ime, četvrti.površina, četvrti.broj_stanovnika,
+        reciklažna_dvorišta.ime, reciklažna_dvorišta.adresa,
+        geo_visina, geo_širina
+    FROM kante
+    LEFT JOIN reciklažna_dvorišta ON reciklažno_dvorište_id = reciklažna_dvorišta.id
+    LEFT JOIN četvrti ON četvrti.id = četvrt_id
+    LEFT JOIN kante_tip ON kante_tip.id = tip_id;
+    '''
+    cur.execute(query)
+    rows = cur.fetchall()
+
+    return rows_to_json(rows)
 
 def export_csv(cur):
     query = ''' 

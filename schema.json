@@ -1,0 +1,1250 @@
+{
+    "$schema": "https://github.com/NewAgeDaedalus/kante_zagreb/schema.json",
+    "$id": "https://github.com/NewAgeDaedalus/kante_zagreb/kante.json",
+    "type": "array",
+    "default": [],
+    "title": "Kante zagreb",
+    "description": "Skup kanti i reciklažnih dvorišta zagreb",
+    "items":{
+        "type": "object",
+        "title": "A Schema",
+        "required": [
+            "object_type",
+            "id",
+            "tip",
+            "četvrt",
+            "geo_visina",
+            "geo_širina",
+            "ime",
+            "adresa",
+            "kante"
+        ],
+        "properties": {
+            "object_type": {
+                "type": "string",
+                "title": "The object_type Schema",
+    		"description": "Determines the type of the object, either \"kanta\" or \"RD-dvorište\"",
+                "examples": [
+                    "kanta",
+                    "RD-dvorište"
+                ]
+            },
+            "id": {
+                "type": "integer",
+                "title": "The id Schema",
+		"description": "ID of the object",
+                "examples": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ]
+            },
+            "tip": {
+                "type": "object",
+                "title": "The tip Schema",
+    		"description": "Subtype information",
+                "required": [
+                    "ime",
+                    "prima",
+                    "privatno"
+                ],
+                "properties": {
+                    "ime": {
+                        "type": "string",
+                        "title": "The ime Schema",
+    			"description": "Name of the \"kanta\" type",
+                        "examples": [
+                            "gradska košara",
+                            "zeleno zvono",
+                            "plava kocka",
+                            "žuta kocka"
+                        ]
+                    },
+                    "prima": {
+                        "type": "string",
+                        "title": "The prima Schema",
+    			"description": "What kind of garbage it contains",
+                        "examples": [
+                            "komunalni",
+                            "staklo",
+                            "papir",
+                            "plastika"
+                        ]
+                    },
+                    "privatno": {
+                        "type": "boolean",
+                        "title": "The privatno Schema",
+    			"description": "Is it somenone's private property",
+                        "examples": [
+                            false,
+			    true
+                        ]
+                    }
+                },
+                "examples": [{
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                {
+                    "ime": "plava kocka",
+                    "prima": "papir",
+                    "privatno": false
+                },
+                {
+                    "ime": "žuta kocka",
+                    "prima": "plastika",
+                    "privatno": false
+                },
+                {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                }]
+            },
+            "četvrt": {
+                "type": "object",
+                "title": "The četvrt Schema",
+		"description": "City district",
+                "required": [
+                    "četvrt_ime",
+                    "četvrt_površina",
+                    "četvrt_broj_stanovnika"
+                ],
+                "properties": {
+                    "četvrt_ime": {
+                        "type": "string",
+                        "title": "The četvrt_ime Schema",
+			"description": "name of the district",
+                        "examples": [
+                            "Podsused - Vrapče"
+                        ]
+                    },
+                    "četvrt_površina": {
+                        "type": "number",
+                        "title": "The četvrt_površina Schema",
+			"description": "District area in square kilometers",
+                        "examples": [
+                            36.0
+                        ]
+                    },
+                    "četvrt_broj_stanovnika": {
+                        "type": "integer",
+                        "title": "The četvrt_broj_stanovnika Schema",
+			"description": "District population amount",
+                        "examples": [
+                            45759
+                        ]
+                    }
+                },
+                "examples": [{
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                }]
+            },
+            "geo_visina": {
+                "type": "number",
+                "title": "The geo_visina Schema",
+		"description": "geo latitude",
+                "examples": [
+                    45.812445738129384,
+                    45.81482748666708,
+                    45.819771257563694,
+                    45.815012080822804,
+                    45.81433340494386,
+                    45.81344926019273,
+                    45.815314573365406
+                ]
+            },
+            "geo_širina": {
+                "type": "number",
+                "title": "The geo_širina Schema",
+		"description": "geo longitude",
+                "examples": [
+                    15.895851429442905,
+                    15.898359123519928,
+                    15.889821488692705,
+                    15.89528178771937,
+                    15.905920576844299,
+                    15.906074020670552,
+                    15.894662206102602
+                ]
+            },
+            "ime": {
+                "type": "string",
+                "default": "",
+                "title": "The ime Schema",
+		"description": "name of the recyclicng yard",
+                "examples": [
+                    "RD PODSUSED-VRAPČE"
+                ]
+            },
+            "adresa": {
+                "type": "string",
+                "default": "",
+                "title": "The adresa Schema",
+		"description": "Adress of the recyclicng yard",
+                "examples": [
+                    "Kovinska 8a"
+                ]
+            },
+            "kante": {
+                "type": "array",
+                "default": [],
+                "title": "The kante Schema",
+		"description": "array of kante objects, with the same properties of above",
+                "items": {
+                    "type": "object",
+                    "title": "A Schema",
+                    "required": [
+                        "object_type",
+                        "id",
+                        "tip",
+                        "četvrt",
+                        "geo_visina",
+                        "geo_širina"
+                    ],
+                    "properties": {
+                        "object_type": {
+                            "type": "string",
+                            "title": "The object_type Schema",
+                            "examples": [
+                                "kanta"
+                            ]
+                        },
+                        "id": {
+                            "type": "integer",
+                            "title": "The id Schema",
+                            "examples": [
+                                11,
+                                12,
+                                13,
+                                14,
+                                15,
+                                16,
+                                17
+                            ]
+                        },
+                        "tip": {
+                            "type": "object",
+                            "title": "The tip Schema",
+                            "required": [
+                                "ime",
+                                "prima",
+                                "privatno"
+                            ],
+                            "properties": {
+                                "ime": {
+                                    "type": "string",
+                                    "title": "The ime Schema",
+                                    "examples": [
+                                        "gradska košara",
+                                        "zeleno zvono",
+                                        "plava kocka"
+                                    ]
+                                },
+                                "prima": {
+                                    "type": "string",
+                                    "title": "The prima Schema",
+                                    "examples": [
+                                        "komunalni",
+                                        "staklo",
+                                        "papir"
+                                    ]
+                                },
+                                "privatno": {
+                                    "type": "boolean",
+                                    "title": "The privatno Schema",
+                                    "examples": [
+                                        false
+                                    ]
+                                }
+                            },
+                            "examples": [{
+                                "ime": "gradska košara",
+                                "prima": "komunalni",
+                                "privatno": false
+                            },
+                            {
+                                "ime": "gradska košara",
+                                "prima": "komunalni",
+                                "privatno": false
+                            },
+                            {
+                                "ime": "zeleno zvono",
+                                "prima": "staklo",
+                                "privatno": false
+                            },
+                            {
+                                "ime": "zeleno zvono",
+                                "prima": "staklo",
+                                "privatno": false
+                            },
+                            {
+                                "ime": "zeleno zvono",
+                                "prima": "staklo",
+                                "privatno": false
+                            },
+                            {
+                                "ime": "plava kocka",
+                                "prima": "papir",
+                                "privatno": false
+                            },
+                            {
+                                "ime": "plava kocka",
+                                "prima": "papir",
+                                "privatno": false
+                            }]
+                        },
+                        "četvrt": {
+                            "type": "object",
+                            "title": "The četvrt Schema",
+                            "required": [
+                                "četvrt_ime",
+                                "četvrt_površina",
+                                "četvrt_broj_stanovnika"
+                            ],
+                            "properties": {
+                                "četvrt_ime": {
+                                    "type": "string",
+                                    "title": "The četvrt_ime Schema",
+                                    "examples": [
+                                        "Podsused - Vrapče"
+                                    ]
+                                },
+                                "četvrt_površina": {
+                                    "type": "number",
+                                    "title": "The četvrt_površina Schema",
+                                    "examples": [
+                                        36.0
+                                    ]
+                                },
+                                "četvrt_broj_stanovnika": {
+                                    "type": "integer",
+                                    "title": "The četvrt_broj_stanovnika Schema",
+                                    "examples": [
+                                        45759
+                                    ]
+                                }
+                            },
+                            "examples": [{
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            },
+                            {
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            },
+                            {
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            },
+                            {
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            },
+                            {
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            },
+                            {
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            },
+                            {
+                                "četvrt_ime": "Podsused - Vrapče",
+                                "četvrt_površina": 36.0,
+                                "četvrt_broj_stanovnika": 45759
+                            }]
+                        },
+                        "geo_visina": {
+                            "type": "number",
+                            "title": "The geo_visina Schema",
+                            "examples": [
+                                45.810364255041925
+                            ]
+                        },
+                        "geo_širina": {
+                            "type": "number",
+                            "title": "The geo_širina Schema",
+                            "examples": [
+                                15.853034187543082
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "object_type": "kanta",
+                        "id": 11,
+                        "tip": {
+                            "ime": "gradska košara",
+                            "prima": "komunalni",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 12,
+                        "tip": {
+                            "ime": "gradska košara",
+                            "prima": "komunalni",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 13,
+                        "tip": {
+                            "ime": "zeleno zvono",
+                            "prima": "staklo",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 14,
+                        "tip": {
+                            "ime": "zeleno zvono",
+                            "prima": "staklo",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 15,
+                        "tip": {
+                            "ime": "zeleno zvono",
+                            "prima": "staklo",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 16,
+                        "tip": {
+                            "ime": "plava kocka",
+                            "prima": "papir",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 17,
+                        "tip": {
+                            "ime": "plava kocka",
+                            "prima": "papir",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    }]
+                },
+                "examples": [
+                    [{
+                        "object_type": "kanta",
+                        "id": 11,
+                        "tip": {
+                            "ime": "gradska košara",
+                            "prima": "komunalni",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 12,
+                        "tip": {
+                            "ime": "gradska košara",
+                            "prima": "komunalni",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 13,
+                        "tip": {
+                            "ime": "zeleno zvono",
+                            "prima": "staklo",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 14,
+                        "tip": {
+                            "ime": "zeleno zvono",
+                            "prima": "staklo",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 15,
+                        "tip": {
+                            "ime": "zeleno zvono",
+                            "prima": "staklo",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 16,
+                        "tip": {
+                            "ime": "plava kocka",
+                            "prima": "papir",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    },
+                    {
+                        "object_type": "kanta",
+                        "id": 17,
+                        "tip": {
+                            "ime": "plava kocka",
+                            "prima": "papir",
+                            "privatno": false
+                        },
+                        "četvrt": {
+                            "četvrt_ime": "Podsused - Vrapče",
+                            "četvrt_površina": 36.0,
+                            "četvrt_broj_stanovnika": 45759
+                        },
+                        "geo_visina": 45.810364255041925,
+                        "geo_širina": 15.853034187543082
+                    }]
+                ]
+            }
+        },
+        "examples": [{
+            "object_type": "kanta",
+            "id": 1,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.812445738129384,
+            "geo_širina": 15.895851429442905
+        },
+        {
+            "object_type": "kanta",
+            "id": 2,
+            "tip": {
+                "ime": "zeleno zvono",
+                "prima": "staklo",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81482748666708,
+            "geo_širina": 15.898359123519928
+        },
+        {
+            "object_type": "kanta",
+            "id": 3,
+            "tip": {
+                "ime": "plava kocka",
+                "prima": "papir",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81482748666708,
+            "geo_širina": 15.898359123519928
+        },
+        {
+            "object_type": "kanta",
+            "id": 4,
+            "tip": {
+                "ime": "žuta kocka",
+                "prima": "plastika",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81482748666708,
+            "geo_širina": 15.898359123519928
+        },
+        {
+            "object_type": "kanta",
+            "id": 5,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.819771257563694,
+            "geo_širina": 15.889821488692705
+        },
+        {
+            "object_type": "kanta",
+            "id": 6,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.815012080822804,
+            "geo_širina": 15.89528178771937
+        },
+        {
+            "object_type": "kanta",
+            "id": 7,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81433340494386,
+            "geo_širina": 15.905920576844299
+        },
+        {
+            "object_type": "kanta",
+            "id": 8,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81344926019273,
+            "geo_širina": 15.906074020670552
+        },
+        {
+            "object_type": "kanta",
+            "id": 9,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81344926019273,
+            "geo_širina": 15.906074020670552
+        },
+        {
+            "object_type": "kanta",
+            "id": 10,
+            "tip": {
+                "ime": "zeleno zvono",
+                "prima": "staklo",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.815314573365406,
+            "geo_širina": 15.894662206102602
+        },
+        {
+            "object_type": "RD-dvorište",
+            "ime": "RD PODSUSED-VRAPČE",
+            "adresa": "Kovinska 8a",
+            "kante": [{
+                "object_type": "kanta",
+                "id": 11,
+                "tip": {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 12,
+                "tip": {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 13,
+                "tip": {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 14,
+                "tip": {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 15,
+                "tip": {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 16,
+                "tip": {
+                    "ime": "plava kocka",
+                    "prima": "papir",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 17,
+                "tip": {
+                    "ime": "plava kocka",
+                    "prima": "papir",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            }]
+        }]
+    },
+    "examples": [
+        [{
+            "object_type": "kanta",
+            "id": 1,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.812445738129384,
+            "geo_širina": 15.895851429442905
+        },
+        {
+            "object_type": "kanta",
+            "id": 2,
+            "tip": {
+                "ime": "zeleno zvono",
+                "prima": "staklo",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81482748666708,
+            "geo_širina": 15.898359123519928
+        },
+        {
+            "object_type": "kanta",
+            "id": 3,
+            "tip": {
+                "ime": "plava kocka",
+                "prima": "papir",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81482748666708,
+            "geo_širina": 15.898359123519928
+        },
+        {
+            "object_type": "kanta",
+            "id": 4,
+            "tip": {
+                "ime": "žuta kocka",
+                "prima": "plastika",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81482748666708,
+            "geo_širina": 15.898359123519928
+        },
+        {
+            "object_type": "kanta",
+            "id": 5,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.819771257563694,
+            "geo_širina": 15.889821488692705
+        },
+        {
+            "object_type": "kanta",
+            "id": 6,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.815012080822804,
+            "geo_širina": 15.89528178771937
+        },
+        {
+            "object_type": "kanta",
+            "id": 7,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81433340494386,
+            "geo_širina": 15.905920576844299
+        },
+        {
+            "object_type": "kanta",
+            "id": 8,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81344926019273,
+            "geo_širina": 15.906074020670552
+        },
+        {
+            "object_type": "kanta",
+            "id": 9,
+            "tip": {
+                "ime": "gradska košara",
+                "prima": "komunalni",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.81344926019273,
+            "geo_širina": 15.906074020670552
+        },
+        {
+            "object_type": "kanta",
+            "id": 10,
+            "tip": {
+                "ime": "zeleno zvono",
+                "prima": "staklo",
+                "privatno": false
+            },
+            "četvrt": {
+                "četvrt_ime": "Podsused - Vrapče",
+                "četvrt_površina": 36.0,
+                "četvrt_broj_stanovnika": 45759
+            },
+            "geo_visina": 45.815314573365406,
+            "geo_širina": 15.894662206102602
+        },
+        {
+            "object_type": "RD-dvorište",
+            "ime": "RD PODSUSED-VRAPČE",
+            "adresa": "Kovinska 8a",
+            "kante": [{
+                "object_type": "kanta",
+                "id": 11,
+                "tip": {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 12,
+                "tip": {
+                    "ime": "gradska košara",
+                    "prima": "komunalni",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 13,
+                "tip": {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 14,
+                "tip": {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 15,
+                "tip": {
+                    "ime": "zeleno zvono",
+                    "prima": "staklo",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 16,
+                "tip": {
+                    "ime": "plava kocka",
+                    "prima": "papir",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            },
+            {
+                "object_type": "kanta",
+                "id": 17,
+                "tip": {
+                    "ime": "plava kocka",
+                    "prima": "papir",
+                    "privatno": false
+                },
+                "četvrt": {
+                    "četvrt_ime": "Podsused - Vrapče",
+                    "četvrt_površina": 36.0,
+                    "četvrt_broj_stanovnika": 45759
+                },
+                "geo_visina": 45.810364255041925,
+                "geo_širina": 15.853034187543082
+            }]
+        }]
+    ]
+}

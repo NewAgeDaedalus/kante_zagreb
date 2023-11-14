@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+	<title>Kante Zagreb</title>
+	<script src="/main.js"></script>
+<style>
+	table, th, td {
+		border: 1px solid black;
+	}
+	table {
+		width: 100%;
+	}
+</style>
+</head>
+<body onload="main();">
+	<div>
+		<h2>Filter</h2>
+		<input id="filter" type="text" placeholder="Filtriraj" onkeypress="query(event);">
+		<select name="select atribut" id="drop-bar">
+		    <option value="kante_tip.ime">Tip kante</option>
+		    <option value="kante_tip.prima">Otpad</option>
+		    <option value="četvrti.ime">četvrt</option>
+		    <option value="reciklažna_dvorišta.ime">Reciklažno dvorište</option>
+		</select>  	
+	</div>
+	<br>
+	<table> 
+		<tr>
+			<th>Id</th>
+			<th>Ime tipa kante</th>
+			<th>Otpad</th>
+			<th>Četvrt</th>
+			<th>Reciklažno dvorište</th>
+			<th>Adresa reciklažnog dvorišta</th>
+			<th>Geografska širina</th>
+			<th>Geografska visina</th>
+		</tr>
+		<tbody id="tb">
+		</tbody>
+	</table>
+	<br>
+	<a id="export-json" onClick="export_json();" >Izvezi u json</a>
+	<br>
+	<a id="export-csv" onClick="export_csv();">Izvezi u csv</a>
+</body>
+</html>
