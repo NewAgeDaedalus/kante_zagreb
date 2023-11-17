@@ -32,7 +32,7 @@ source kante_zagreb_venv/bin/activate
 pip install -r requirements.txt
 ```
 Sljedeće kako bi se poslužitelj mogao spojiti na instancu PostgreSQL baze,
-potrebno je definirati u okolišnu varijablu KANTE\_ZAGREB\_USER. Pretpostavka je
+potrebno je definirati u okolišnu varijablu KANTE\_ZAGREB\_USER. Pretpostavka je,
 da je na Vašem sustavu već ispravno postavljen PostgreSQL.
 ```
 export KANTE_ZAGREB_USER=[ime korisnika koji ime pravo pristupa bazi kante_zagreb]
