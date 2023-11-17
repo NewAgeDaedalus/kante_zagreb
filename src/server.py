@@ -20,7 +20,7 @@ def serve_request(sock, request):
     if ( method != b'GET' ):
         return 2
 
-    if (path == b'/index.html'):
+    if (path == b'/index.html' or path == b"/"):
         data = b''
         with open('../res/templates/index.html', 'rb') as file:
             data += file.read()
@@ -33,15 +33,15 @@ def serve_request(sock, request):
             data += file.read()
         response = construct_response(200, "text/html", data)
         sock.send(response)
-    elif (path == b'/kante_zagreb.json'):
+    elif (path == b"/reciklazna_dvorista.json" ):
         data = b''
-        with open('../kante_zagreb.json', 'rb') as file:
+        with open('../reciklažna_dvorišta.json', 'rb') as file:
             data += file.read()
         response = construct_response(200, "application/json", data)
         sock.send(response)
-    elif (path == b'/kante_zagreb.csv'):
+    elif (path == b'/reciklazna_dvorista.csv'):
         data = b''
-        with open('../kante_zagreb.csv', 'rb') as file:
+        with open('../reciklažna_dvorišta.csv', 'rb') as file:
             data += file.read()
         response = construct_response(200, "plain", data)
         sock.send(response)
@@ -64,7 +64,6 @@ def serve_request(sock, request):
         sock.send(response)
 
 async def serve_connection(sock):
-    # I will not code defensively
     data = sock.recv(1024)
     requests = data.split(b'\r\n\r\n')
     for request in requests:

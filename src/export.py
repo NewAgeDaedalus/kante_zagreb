@@ -1,51 +1,39 @@
 import psycopg2 
 import json
-
-def create_kanta_object(row):
-    return { 
-            'object_type': 'kanta', 'id':row[0], 
-            'tip': {'ime':row[1], 'prima':row[2], 'privatno':row[3]},
-            'četvrt':{'četvrt_ime': row[4], 'četvrt_površina':row[5], 'četvrt_broj_stanovnika':row[6]},
-            'geo_visina':row[9], 'geo_širina':row[10]
-    }
+import os
 
 def rows_to_json(rows:list) -> list:
     result = []
     # Pronađi reciklažna_dvorišta
     rd_dvorišta = {}
     for row in rows:
-        # Kanta pripada reciklažnom dvorištu
-        if row[7] != None:
-            try:
-                rd_dvorišta[row[7]]
-            except KeyError:
-                rd_dvorišta[row[7]] = {
-                        'object_type':'RD-dvorište',
-                        'ime':row[7],
-                        'adresa':row[8],
-                        'kante':[]
-                }
-            rd_dvorišta[row[7]]['kante'].append(create_kanta_object(row))
-        else:
-            result.append(create_kanta_object(row))
+        try:
+            rd_dvorišta[row[0]]
+            rd_dvorišta[row[0]]["kante"].append({"id":row[8], "prima":row[9]})
+        except KeyError:
+            rd_dvorišta[row[0]] = {
+                    "id":row[0],
+                    "ime":row[1],
+                    "adresa":row[2],
+                    "telefonski_broj":row[3],
+                    "četvrt":row[4],
+                    "radno_vrijeme":row[5],
+                    "geo_širina":row[6],
+                    "geo_dužina":row[7],
+                    "kante":[{"id":row[8], "prima":row[9]}]
+            }
+
     
     for dvorište in rd_dvorišta.values():
         result.append(dvorište)
     return result
 
-
 # Stvrara listu koja sadržava objekta kanti i reckilažnih_dvorišta,
 # reckilažna dvorišta sadrže objekte kanti
 def export_json(cur):
     query = ''' 
-    SELECT kante.id, kante_tip.ime, kante_tip.prima, kante_tip.privatno,
-        četvrti.ime, četvrti.površina, četvrti.broj_stanovnika,
-        reciklažna_dvorišta.ime, reciklažna_dvorišta.adresa,
-        geo_visina, geo_širina
-    FROM kante
-    LEFT JOIN reciklažna_dvorišta ON reciklažno_dvorište_id = reciklažna_dvorišta.id
-    LEFT JOIN četvrti ON četvrti.id = četvrt_id
-    LEFT JOIN kante_tip ON kante_tip.id = tip_id;
+    SELECT reciklažna_dvorišta.*, kante.id as kanta_id, kante.prima from
+    reciklažna_dvorišta join kante on reciklažna_dvorišta.id = id_dvorišta; 
     '''
     cur.execute(query)
     rows = cur.fetchall()
@@ -54,25 +42,20 @@ def export_json(cur):
 
 def export_csv(cur):
     query = ''' 
-    SELECT kante.id, kante_tip.ime, kante_tip.prima, kante_tip.privatno,
-        četvrti.ime, četvrti.površina, četvrti.broj_stanovnika,
-        reciklažna_dvorišta.ime, reciklažna_dvorišta.adresa,
-        geo_visina, geo_širina
-    FROM kante
-    LEFT JOIN reciklažna_dvorišta ON reciklažno_dvorište_id = reciklažna_dvorišta.id
-    LEFT JOIN četvrti ON četvrti.id = četvrt_id
-    LEFT JOIN kante_tip ON kante_tip.id = tip_id;
+    SELECT reciklažna_dvorišta.*, kante.id as kanta_id, kante.prima from
+    reciklažna_dvorišta join kante on reciklažna_dvorišta.id = id_dvorišta; 
     '''
     cur.execute(query)
     rows = cur.fetchall()
-    csv_str = "id,tip,prima,privatna,ime_četvrti,četvrt_površina,četvrt_broj_stanovnika,ime_reciklažnog_dvorišta,adresa_reciklažnog_dvorišta,geo_visina,geo_širina\n"
+    csv_str = "id,ime,adresa,telefonski_broj,četvrt,radno_vrijeme,geo_širina,geo_širina,geo_dužina,kanta_id,prima\n"
     for row in rows:
         row_str = ",".join(list(map(lambda x: str(x), list(row))))+"\n"
         csv_str += row_str
     return csv_str[:-1]
 
 def export(format:str, output_file:str):
-    conn = psycopg2.connect("dbname=kante_zagreb user=fabian")
+    db_user = os.environ["KANTE_ZAGREB_USER"]
+    conn = psycopg2.connect(f"dbname=kante_zagreb user={db_user}")
     cur = conn.cursor()
     
     if (format == "json"):

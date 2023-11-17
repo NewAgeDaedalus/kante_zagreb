@@ -2,41 +2,68 @@ import psycopg2
 import json
 from export import rows_to_json
 from urllib.parse import unquote
+from os import environ
 
 def extract_restrictions(path:str) -> list:
-    restrictions = []
-    restrictions_str = path.split('&')
-    for restriction_str in restrictions_str:
-        tmp = restriction_str.split('=')
-        if len(tmp) != 2:
-            return None
-        restrictions.append((tmp[0], tmp[1]))
-    return restrictions
+    attributes = []
+    path_list = path.split('=')
+    print(path_list)
+    if (len(path_list) < 2):
+        return None, None
+    attributes = path_list[0].split(",")
+    return attributes, path_list[1]
+
+def fill_missing_containers(cur, data):
+    for rd in data:
+        query='''
+        SELECT kante.id, kante.prima
+        FROM kante
+        join reciklažna_dvorišta on id_dvorišta = reciklažna_dvorišta.id
+        where id_dvorišta = 
+        '''
+        query += f'{rd["id"]};'
+        cur.execute(query)
+        rd["kante"] = []
+        nove_kante = cur.fetchall()
+        for nova_kanta in nove_kante:
+            rd["kante"].append({
+                "id": nova_kanta[0],
+                "prima":nova_kanta[1]
+            })
 
 # Completly exposed to sql injection
-def get_kante_data(restrictions) -> bytes:
+def get_rd_data(atributi, value) -> bytes:
     data = None
     query = ''' 
-    SELECT kante.id, kante_tip.ime, kante_tip.prima, kante_tip.privatno,
-        četvrti.ime, četvrti.površina, četvrti.broj_stanovnika,
-        reciklažna_dvorišta.ime, reciklažna_dvorišta.adresa,
-        geo_visina, geo_širina
-    FROM kante
-    LEFT JOIN reciklažna_dvorišta ON reciklažno_dvorište_id = reciklažna_dvorišta.id
-    LEFT JOIN četvrti ON četvrti.id = četvrt_id
-    LEFT JOIN kante_tip ON kante_tip.id = tip_id
+    SELECT reciklažna_dvorišta.*, kante.id as kanta_id, kante.prima from
+    reciklažna_dvorišta join kante on reciklažna_dvorišta.id = id_dvorišta
     '''
-    if restrictions:
-        if len(restrictions) != 0:
-            query += '\n WHERE '
-        i=0
-        for restriction in restrictions:
-            query += f"{restriction[0]} = \'{restriction[1]}\'"
-            if (i != len(restrictions) -1):
-                query += ' and '
+    if ( atributi == [] or atributi[0] == "wildcard"):
+        restriction = value.lower()
+        query += f"\n WHERE LOWER(CAST(reciklažna_dvorišta.id as VARCHAR)) like '%{restriction}%'"
+        query += f"\n or LOWER(ime) like '%{restriction}%'"
+        query += f"\n or LOWER(adresa) like '%{restriction}%'"
+        query += f"\n or LOWER(telefonski_broj) like '%{restriction}%'"
+        query += f"\n or LOWER(CAST(četvrt as VARCHAR)) like '%{restriction}%'"
+        query += f"\n or LOWER(radno_vrijeme) like '%{restriction}%'"
+        query += f"\n or LOWER(CAST(geo_širina as VARCHAR)) like '%{restriction}%'"
+        query += f"\n or LOWER(CAST(geo_dužina as VARCHAR)) like '%{restriction}%'"
+        query += f"\n or LOWER(CAST(kante.id as VARCHAR)) like '%{restriction}%'"
+        query += f"\n or LOWER(CAST(prima as VARCHAR)) like '%{restriction}%'"
+    elif (atributi != []):
+        i = 0
+        for atribut in atributi:
+            value = value.lower()
+            if (i == 0):
+                query += f"\n WHERE LOWER(CAST({atribut} as VARCHAR)) like '%{value}%'"
+            else:
+                query += f"\n or LOWER(CAST({atribut} as VARCHAR)) like '%{value}%'"
             i+=1
-    query += ';'
-    conn = psycopg2.connect("dbname=kante_zagreb user=fabian")
+
+    query += ";";
+    print(query)
+    db_user = environ['KANTE_ZAGREB_USER']
+    conn = psycopg2.connect(f"dbname=kante_zagreb user={db_user}")
     cur = conn.cursor()
     rows = None
     try:
@@ -45,12 +72,14 @@ def get_kante_data(restrictions) -> bytes:
         print(rows)
     except:
         rows = None
-    finally:
+    if rows == None:
         cur.close()
         conn.close()
-    if rows == None:
         return None
     data = rows_to_json(rows)
+    fill_missing_containers(cur, data)
+    cur.close()
+    conn.close()
     return bytes(json.dumps(data), "utf-8")
 
 
@@ -59,16 +88,9 @@ def api(path:bytes) -> bytes:
     path = unquote(path)
     path = path.removeprefix('/api/')
     # Determine table
-    table = path[:path.find('?')]
-    if ( (table != 'kante' and table != 'rd') or ('?' not in path)):
-        return None
-    path = path[path.find('?')+1:]
     #Determine restrictions
-    restrictions = extract_restrictions(path)
-    if table == 'kante':
-        return get_kante_data(restrictions)
-    elif table == 'rd':
-        return get_rd_data(restrictions)
-    else:
-        return None
+    attributes, value = extract_restrictions(path)
+    if (attributes == None or  value == None):
+        return bytes(json.dumps({"error": "Invalid url"}), "utf-8")
+    return get_rd_data(attributes, value)
 

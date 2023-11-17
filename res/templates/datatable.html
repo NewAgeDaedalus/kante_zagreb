@@ -8,37 +8,53 @@
 	table, th, td {
 		border: 1px solid black;
 	}
-	table {
-		width: 100%;
-	}
 </style>
 </head>
 <body onload="main();">
 	<div>
 		<h2>Filter</h2>
 		<input id="filter" type="text" placeholder="Filtriraj" onkeypress="query(event);">
-		<select name="select atribut" id="drop-bar">
-		    <option value="kante_tip.ime">Tip kante</option>
-		    <option value="kante_tip.prima">Otpad</option>
-		    <option value="četvrti.ime">četvrt</option>
-		    <option value="reciklažna_dvorišta.ime">Reciklažno dvorište</option>
+		<select name="select atribut" id="drop-bar", multiple>
+			    <option value="wildcard">Wildcard</option>
+			    <option value="reciklažna_dvorišta.id">Id</option>
+			    <option value="reciklažna_dvorišta.ime">Ime</option>
+			    <option value="reciklažna_dvorišta.adresa">Adresa</option>
+			    <option value="reciklažna_dvorišta.četvrt">Četvrt</option>
+			    <option value="reciklažna_dvorišta.telefonski_broj">Telefonski broj</option>
+			    <option value="reciklažna_dvorišta.radno_vrijeme">Radno vrijeme</option>
+			    <option value="reciklažna_dvorišta.geo_širina">Geografska širina</option>
+			    <option value="reciklažna_dvorišta.geo_dužina">Geografska dužina</option>
+			    <option value="kante.id">Id</option>
+			    <option value="kante.prima">Otpad</option>
 		</select>  	
 	</div>
 	<br>
 	<table> 
 		<tr>
 			<th>Id</th>
-			<th>Ime tipa kante</th>
-			<th>Otpad</th>
-			<th>Četvrt</th>
-			<th>Reciklažno dvorište</th>
-			<th>Adresa reciklažnog dvorišta</th>
+			<th>Ime reciklažnog dvorišta</th>
+			<th>Adresa</th>
+			<th>Gradska četvrt</th>
+			<th>Telefonski broj</th>
+			<th>Radno vrijeme</th>
 			<th>Geografska širina</th>
-			<th>Geografska visina</th>
+			<th>Geografska dužina</th>
+			<th>Spremnici</th>
 		</tr>
 		<tbody id="tb">
 		</tbody>
 	</table>
+	<div hidden="" id="kante-table-container">
+		<h2 id="kante-label">Spremnici u </h2>
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Otpad</th>
+			</tr>
+			<tbody id="kante-body">
+			</tbody>
+		</table>
+	</div>
 	<br>
 	<a id="export-json" onClick="export_json();" >Izvezi u json</a>
 	<br>

@@ -1,14 +1,18 @@
-# KANTE ZAGREB
+# Reciklažna dvorišta Zagreb
 
-Otvoreni skup podataka za kante za smeće u Zagrebu.
+Otvoreni skup podataka za reciklažna dvorišta grada Zagreba. Projekt je stvoren u edukativne svrhe i
+podaci su fiktivni.
 Laboratorijske vježbe iz kolegija otvorenog računarstva, Fakulteta elektrotehnike i računarstva Zagreb.
 
 Autor: Fabian Penezić\
 Verzija: 1.0\
 Jezik: hrvatski\
-Podaci stvoreni: 30.10.2023.\
+Podaci stvoreni: 15.11.2023.\
 Prostor: Grad Zagreb\
-Baza podataka: PostgreSQL
+Baza podataka: PostgreSQL\
+Kolegij: Otvoreno računarsvto 
+Fakultet: Fakutlet računarstva i elektrotehnike 
+
 
 ## Uvoz za POSTGRESQL na operacijskom sustavu GNU/LINUX
 Stvorite bazu podataka za kante za smeće
@@ -20,26 +24,38 @@ Izvršite naredbe u datoteci "creation.sql"
 psql -d kante_zagreb -a -f creation.sql
 ```
 
+## Upute za pokretanje lokalne instance
+### Instalacija paketa i konfiguracija python venv-a
+```
+python -m venv kante_zagreb_venv
+source kante_zagreb_venv/bin/activate
+pip install -r requirements.txt
+```
+Sljedeće kako bi se poslužitelj mogao spojiti na instancu PostgreSQL baze,
+potrebno je definirati u okolišnu varijablu KANTE\_ZAGREB\_USER. Pretpostavka je
+da je na Vašem sustavu već ispravno postavljen PostgreSQL.
+```
+export KANTE_ZAGREB_USER=[ime korisnika koji ime pravo pristupa bazi kante_zagreb]
+```
+Sad je sve spremno za pokretanje, sljedeća naredba pokreće instancu "kante\_zagreb" na 
+0.0.0.0:1234.
+```
+cd src
+python ./main.py export -s 0.0.0.0 -p 1234
+```
+
+
 ## Opis skupa podataka
 
-### Entitet kante
-| id | tip\_id | četvrt\_id | reciklažno\_dvorište\_id | geo\_visina | geo_širina |
+### Entitet reciklažno dvorište
+| id | ime | adresa | četvrt | telefonski\_broj | radno\_vrijeme | geo\_širina | geo\_duljina |
 |----|---------|------------|-------------|------------|
-|    |ključ na tip kante za smeće | ključ na četvrti u kojoj se nalazi | ključ na reciklažno dvorište u kojem se nalaz  |geografska visina | geografska širina |
+|    | ime RD-a | adresa RD-a | gradska četvrt u kojoj se nalazi RD | radno vrijeme RD-a | zemljopisna širina RD-a | zemljopisna dužina RD-a | 
 
-### Entitet tip\_kante
+### Entitet kante
 
-| id |  ime    |   prima    |  privatno   |
+| id |  id\_dvorišta    |   prima   | 
 |----|---------|------------|-------------|
-|    | opisno ime tipa kante | tip smeća koje kanta prima (komunalno, plastika, staklo ...) | privatno=DA ili NE |
+|    | Id reciklažnog dvorišta kojem kanta pripada | tip otpada koje kanta prima (plastika, staklo ...) | 
 
-### Entitet četvrti
-| id |  ime    |  površina |  broj\_stanovnika |
-|----|---------|------------|-------------|
-|    | ime četvrti| površina izražena u kvadratnim kilometrima | 
-
-### Entitet reciklažna\_dvorišta
-| id |  ime    |  adresa    |
-|----|---------|------------|
-|    | ime reciklažnog dvorišta| adresa reciklažnog dvorišta
 

@@ -11,11 +11,17 @@ async function get_query_data(){
 	const dropbar = document.getElementById("drop-bar")
 	const filter = document.getElementById("filter");
 	if (filter.value == '')
-		return "/api/kante?";
-	else
-		return "/api/kante?" + dropbar.value + "=" + filter.value;
+		return "/api/wildcard=" + filter.value;
+	let ret = "/api/"
+	for ( option of dropbar.options ){
+		if ( !option.selected ){
+			continue;
+		}
+		ret = ret + String(option.value) + ","
+	}
+	ret = ret.substring(0, ret.length -1); //remove ,
+	return ret + "=" + filter.value;
 }
-
 
 function create_cell(value){
 	cell = document.createElement("td");
@@ -23,35 +29,59 @@ function create_cell(value){
 	return cell;
 }
 
-function create_row_kanta(object, table, rd, addr){
+function create_kante_cell(object){
+	cell = document.createElement("td")
+	button = document.createElement("button");
+	button.setAttribute("onClick", "show_kante(" + String(object.id) + ");");
+	button.innerHTML = "Prikaži kante"
+	cell.appendChild(button)
+	return cell;
+}
+
+function create_row_kanta(object, table){
 	row = document.createElement("tr")
 	row.appendChild(create_cell(String(object.id)))
-	row.appendChild(create_cell(String(object.tip.ime)))
-	row.appendChild(create_cell(String(object.tip.prima)));
-	row.appendChild(create_cell(String(object.četvrt.četvrt_ime)));
-	row.appendChild(create_cell(rd));
-	row.appendChild(create_cell(addr));
-	row.appendChild(create_cell(String(object.geo_visina)));
+	row.appendChild(create_cell(String(object.ime)))
+	row.appendChild(create_cell(String(object.adresa)));
+	row.appendChild(create_cell(String(object.četvrt)));
+	row.appendChild(create_cell(String(object.telefonski_broj)));
+	row.appendChild(create_cell(String(object.radno_vrijeme)));
 	row.appendChild(create_cell(String(object.geo_širina)));
+	row.appendChild(create_cell(String(object.geo_dužina)));
+	row.appendChild(create_kante_cell(object))
 	table.appendChild(row)
 }
 
-function create_rows(object, table){
-	for (let i=0; i < object.kante.length; i++){
-		create_row_kanta(object.kante[i], table, object.ime, object.adresa);
+function create_table(){
+	document.getElementById("kante-table-container").setAttribute("hidden", "");
+	let table = document.getElementById("tb")
+	table.innerHTML=""
+	for (let i = 0; i < current_json_obj.length; i++){
+		create_row_kanta(current_json_obj[i], table)
 	}
 }
 
-function create_table(){
-	let table = document.getElementById("tb")
-	table.innerHTML=""
-	console.log(current_json_obj[0].object_type)
-	for (let i = 0; i < current_json_obj.length; i++){
-		if (current_json_obj[i].object_type == "kanta")
-			create_row_kanta(current_json_obj[i], table, "NULL", "NULL");	
-		else
-			create_rows(current_json_obj[i], table);
+function show_kante(id){
+	//Find the kante
+	let obj = null;
+	for (let i=0; i < current_json_obj.length; i++){
+		if (current_json_obj[i].id == id){
+			obj = current_json_obj[i];
+			break;
+		}
 	}
+	if (obj == null)
+		return;
+	table = document.getElementById("kante-body");
+	table.innerHTML = "";
+	for ( kanta of obj.kante){
+		row = document.createElement("tr")
+		row.appendChild(create_cell(kanta.id))
+		row.appendChild(create_cell(kanta.prima))
+		table.appendChild(row);
+	}
+	document.getElementById("kante-label").innerHTML = "Spremnici u " + String(obj.ime);
+	document.getElementById("kante-table-container").removeAttribute("hidden");
 }
 
 function downloadObjectAsJson(exportObj, exportName){
@@ -65,29 +95,30 @@ function downloadObjectAsJson(exportObj, exportName){
 }
 
 function export_json(){
-	let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(current_json_obj));
-	let downloadAnchorNode = document.createElement('a');
-	downloadAnchorNode.setAttribute("href",     dataStr);
-	downloadAnchorNode.setAttribute("download", "kante.json");
-	document.body.appendChild(downloadAnchorNode); // required for firefox
-	downloadAnchorNode.click();
-	downloadAnchorNode.remove();
+// 	let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(current_json_obj));
+// 	let downloadAnchorNode = document.createElement('a');
+// 	downloadAnchorNode.setAttribute("href",     dataStr);
+// 	downloadAnchorNode.setAttribute("download", "kante.json");
+// 	document.body.appendChild(downloadAnchorNode); // required for firefox
+// 	downloadAnchorNode.click();
+// 	downloadAnchorNode.remove();
+	let new_tab = window.open('data:application/json,' + JSON.stringify(current_json_obj));
 }
 function construct_csv(){
 	let csv = "id,tip,otpad,četvrt,rd,adresa,geo_širina,geo_visina\n";
-	let table = document.getElementById("tb");
-	let rows = table.querySelectorAll("tr"); 
-	for (let i = 0; i < rows.length; i++){
-		let row = rows[i];
-		let cells = row.querySelectorAll("td");
-		console.log(cells)
-		for (let j = 0; j < cells.length; j++){	
-			csv += cells[j].innerHTML;
-			if ( j != cells.length -1 )
-				csv += ","
+	for ( rd of current_json_obj ){
+		let line =""
+		line +=String(rd.id)+","
+		line +=String(rd.ime)+","
+		line +=String(rd.adresa)+","
+		line +=String(rd.četvrt)+","
+		line +=String(rd.telefonski_broj)+","
+		line +=String(rd.radno_vrijeme)+","
+		line +=String(rd.geografska_širina)+","
+		line +=String(rd.geografska_dužina)+","
+		for ( kanta of rd.kante ){
+			csv += line + String(kanta.id) + "," + String(kanta.prima) + "\n";
 		}
-		if ( i != rows.length -1 )
-			csv += "\n"
 	}
 	return csv;
 }
@@ -112,7 +143,7 @@ async function query(e){
 
 async function main(){
 	//Get the data
-	current_json_obj = await get_data("/api/kante?")
+	current_json_obj = await get_data("/api/wildcard=")
 	create_table()
 }
 

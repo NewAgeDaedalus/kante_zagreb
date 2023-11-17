@@ -1,5 +1,4 @@
 DROP TABLE kante;
-DROP TABLE kante_tip;
 DROP TABLE reciklažna_dvorišta;
-DROP TABLE četvrti;
-DROP TYPE TIP_SMECA;
+DROP TYPE OTPAD_ENUM;
+DROP TYPE ČETVRT_ENUM;
