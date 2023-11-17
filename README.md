@@ -49,13 +49,13 @@ python ./main.py export -s 0.0.0.0 -p 1234
 
 ### Entitet reciklažno dvorište
 | id | ime | adresa | četvrt | telefonski\_broj | radno\_vrijeme | geo\_širina | geo\_duljina |
-|----|---------|------------|-------------|------------|
+|----|---------|------------|-------------|------------|------------|------------|------------|
 |    | ime RD-a | adresa RD-a | gradska četvrt u kojoj se nalazi RD | radno vrijeme RD-a | zemljopisna širina RD-a | zemljopisna dužina RD-a | 
 
 ### Entitet kante
 
 | id |  id\_dvorišta    |   prima   | 
-|----|---------|------------|-------------|
+|----|---------|------------|
 |    | Id reciklažnog dvorišta kojem kanta pripada | tip otpada koje kanta prima (plastika, staklo ...) | 
 
 
