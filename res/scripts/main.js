@@ -11,8 +11,8 @@ async function get_query_data(){
 	const dropbar = document.getElementById("drop-bar")
 	const filter = document.getElementById("filter");
 	if (filter.value == '')
-		return "/api/wildcard=" + filter.value;
-	let ret = "/api/"
+		return "/oldapi/wildcard=" + filter.value;
+	let ret = "/oldapi/"
 	for ( option of dropbar.options ){
 		if ( !option.selected ){
 			continue;
@@ -143,7 +143,7 @@ async function query(e){
 
 async function main(){
 	//Get the data
-	current_json_obj = await get_data("/api/wildcard=")
+	current_json_obj = await get_data("/oldapi/wildcard=")
 	create_table()
 }
 

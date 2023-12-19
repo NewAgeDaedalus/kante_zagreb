@@ -1,0 +1,208 @@
+{ 
+    "openapi": "3.0.3", 
+    "info": { 
+        "info": "Api za dohvačanje skupa podtatak o reciklažnim dvorištima u Zagrebu", 
+        "version": "1.0" 
+    }, 
+    "paths": { 
+        "/rd_by_id/{id}": { 
+            "get": { 
+                "summary": "Dohvati reciklažno dvorište preko njegovog identifikatora",
+                "description": "Vrača jedno reciklažno dvorište", 
+                "produces": [ 
+                    "application/json" 
+                ], 
+                "parameters": [ 
+                    { 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifikator reciklažnog dvorišta", 
+                        "required": true, 
+                        "type": "integer", 
+                        "format": "int64" 
+                    } 
+                ], 
+                "responses": { 
+                    "200": { 
+                        "description": "Dobavi reciklažno dvorište s identifikatorom {id}", 
+                        "schema": { 
+                            "$ref": "#/definitions/rd" 
+                        } 
+                    }, 
+                    "404": { 
+                        "description": "Ne postoji reciklažno dvorište s identifikatorom {id}" 
+                    }, 
+                    "400": { 
+                        "description": "ID reciklažnog dvorišta mora biti prirodan broj" 
+                    } 
+                } 
+            }
+        },
+	"/rd_by_name/{name}": { 
+            "get": { 
+                "summary": "Dohvati reciklažno dvorište preko njegovog imena",
+                "description": "Vrača jedno reciklažno dvorište", 
+                "produces": [ 
+                    "application/json" 
+                ], 
+                "parameters": [ 
+                    { 
+                        "name": "name", 
+                        "in": "path", 
+                        "description": "Ime reciklažnog dvorišta", 
+                        "required": true, 
+                        "type": "integer", 
+                        "format": "int64" 
+                    } 
+                ], 
+                "responses": { 
+                    "200": { 
+                        "description": "Dobavi reciklažno dvorište s imenom {name}", 
+                        "schema": { 
+                            "$ref": "#/definitions/rd" 
+                        } 
+                    }, 
+                    "404": { 
+                        "description": "Ne postoji reciklažno dvorište s imenom {name}" 
+                    } 
+                } 
+            }
+        },
+	"/rds_by_district/{district}": { 
+            "get": { 
+                "summary": "Dohvati reciklažna dvorište koja se nalaze u gradskoj četvrti {district}",
+                "description": "Vrača listu reciklažnih dvorišta koja se nalaze u zadanoj četvrti {district}", 
+                "produces": [ 
+                    "application/json" 
+                ], 
+                "parameters": [ 
+                    { 
+                        "name": "district", 
+                        "in": "path", 
+                        "description": "Ime gradske četvrti grada Zagreba", 
+                        "required": true, 
+                        "type": "string"
+                    } 
+                ], 
+                "responses": { 
+                    "200": { 
+                        "description": "Dobavi reciklažno dvorište imenom {name}", 
+                        "schema": { 
+                            "$ref": "#/definitions/rd" 
+                        } 
+                    }, 
+                    "404": { 
+                        "description": "Ne postoji reciklažno imenom {name}" 
+                    } 
+                } 
+            }
+        },
+	"/rds_by_garbage_type/{garbage_type}": { 
+            "get": { 
+                "summary": "Dohvati reciklažna dvorište koja primaju vrstu otpada {garbage_type}",
+                "description": "Vrača listu reciklažnih dvorišta koja prihvačaju vrstu otpada {garbage_type}", 
+                "produces": [ 
+                    "application/json" 
+                ], 
+                "parameters": [ 
+                    { 
+                        "name": "garbage_type", 
+                        "in": "path", 
+                        "description": "Vrsta otpada", 
+                        "required": true, 
+                        "type": "string"
+                    } 
+                ], 
+                "responses": { 
+                    "200": { 
+                        "description": "Dobavi reciklažna dvorišta koja primaju otpad {garbage_type}", 
+                        "schema": { 
+                            "$ref": "#/definitions/rd" 
+                        } 
+                    }, 
+                    "404": { 
+                        "description": "Ne postoje reciklažna dvorišta koja se nalaze u {district}" 
+                    } 
+                } 
+            }
+	},
+	"/rd": { 
+            "put": { 
+                "summary": "Ažuriraj reciklažno dvorište",
+                "description": "Ažurira vrijednosti reciklažnog dvorišta",
+                "produces": [ 
+                    "application/json" 
+                ], 
+		"requestBody": {
+		    "description": "Reciklažno dvorište ažurnim novim podacima, mora sadržavati id postoječeg reciklažnog dvorišta",
+		    "content":{
+			"application/json":{
+			    "schema": "#definitions/rd_update"
+			}
+		    }
+		},
+                "responses": { 
+                    "200": { 
+                        "description": "Uspješno ažuriranje"
+                    }, 
+                    "400": { 
+                        "description": "Neuspješno ažuriranje" 
+                    } 
+                } 
+            },
+	    "post": {
+		"summary": "Stvori novu instancu reciklažnog dvorišta",
+                "description": "Stvori novu instancu reciklažnog dvorišta",
+                "produces": [ 
+                    "application/json" 
+                ], 
+		"requestBody": {
+		    "description": "Novo reciklažno dvorište s svim nužnim atributima",
+		    "content":{
+			"application/json":{
+			    "schema": "#definitions/rd"
+			}
+		    }
+		},
+                "responses": { 
+                    "200": { 
+                        "description": "Uspješno dodavanje"
+                    }, 
+                    "400": { 
+                        "description": "Neuspješno dodavanje" 
+                    } 
+                } 
+            }
+	},
+	"/rd/{id}": {
+	    "delete": {
+		"summary": "Izbriši reciklažno dvorište s identifikatorom {id}",
+                "description": "Izbriši reciklažno dvorište s identifikatorom {id}",
+                "produces": [ 
+                    "application/json" 
+                ], 
+		"parameters": [ 
+                    { 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifikator reciklažnog dvorišta", 
+                        "required": true, 
+                        "type": "integer", 
+                        "format": "int64" 
+                    } 
+                ],
+                "responses": { 
+                    "200": { 
+                        "description": "Uspješno brisanje reciklažnog dvorišta s identifikatorom {id}"
+                    }, 
+                    "400": { 
+                        "description": "Id mora biti prirodan broj" 
+                    },
+		    "404": {
+			"description": "Reciklažno dvorište s identifikatorom {id} ne postoji"
+		    }
+                } 
+	    }
+	}
+    }
+} 
